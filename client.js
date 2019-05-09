@@ -47,14 +47,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const container = document.querySelector('nav.pagination')
+    if (!container) { return }
     pagination = document.createElement('gbi-pagination')
     pagination.setAttribute('num-items', results.length)
     pagination.setAttribute('use-callback', true)
     // pagination.setAttribute('page-num', pageNum)
-    if (container) {
-      container.innerHTML = ''
-      container.append(pagination)
-    }
+    container.innerHTML = ''
+    container.append(pagination)
     // container.innerHTML = `<gbi-pagination num-items="${results.length}" />`
   }
 
