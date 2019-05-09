@@ -80,9 +80,9 @@
     }
 
     render() {
+      this.container.classList.add('open')
+      this.container.classList.remove('closed')
       if (!this.products || this.products.length === 0) {
-        this.container.classList.add('closed')
-        this.container.classList.remove('open')
         return this.container.innerHTML = `No content.`
       }
       this.container.innerHTML = this.products.map(product => {
@@ -94,8 +94,6 @@
           </div>
         `
       }).join('')
-      this.container.classList.add('open')
-      this.container.classList.remove('closed')
     }
 
     requestSaytSuggestions(searchTerm) {
