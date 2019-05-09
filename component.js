@@ -1,5 +1,15 @@
 (function() {
-  class GBSearch extends HTMLElement {
+  class GBBaseElement extends HTMLElement {
+    fireEvent(name, data) {
+      const event = new CustomEvent(name, {
+        bubbles: true,
+        detail: data,
+      })
+      this.dispatchEvent(event)
+    }
+  }
+
+  class GBSearch extends GBBaseElement {
     constructor() {
       super()
       this.searchBox = undefined
@@ -23,18 +33,10 @@
       `
       this.searchBox = this.querySelector('.gb-search-box')
     }
-
-    fireEvent(name, data) {
-      const event = new CustomEvent(name, {
-        bubbles: true,
-        detail: data,
-      })
-      this.dispatchEvent(event)
-    }
   }
   customElements.define('gb-search', GBSearch)
 
-  class GBSayt extends HTMLElement {
+  class GBSayt extends GBBaseElement {
     constructor() {
       super()
       console.log('in constructor for GBSayt');
