@@ -42,7 +42,7 @@
         console.log('Successfully caught SAYT trigger!');
         console.log('Data:', event.detail);
 
-        this.getSaytSuggestions().then((products) => {
+        this.getSaytSuggestions(event.detail.searchTerm).then((products) => {
           console.log('All products: ------------');
           products.forEach((product) => {
             console.log(`${product.name}: ${product.price}`);
@@ -59,12 +59,14 @@
       `
     }
 
-    getSaytSuggestions() {
+    getSaytSuggestions(searchTerm) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           const numItems = 10
-          const minIndex = Math.random() * (window.mockData.length - numItems)
-          resolve(window.mockData.slice(minIndex, minIndex + numItems))
+          const items = window.mockData.filter(product => {
+            return product.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+          }).slice(0, 10)
+          resolve(items)
         }, 350)
       })
     }
