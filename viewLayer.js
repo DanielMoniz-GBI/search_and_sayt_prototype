@@ -38,10 +38,14 @@
   }
   customElements.define('gb-search', GBSearch)
 
+
   class GBSayt extends GBBaseElement {
     constructor() {
-      super()
       console.log('in constructor for GBSayt');
+      super()
+      this.container = undefined
+      this.products = []
+
       window.addEventListener('gb-trigger-sayt', (event) => {
         console.log('Successfully caught SAYT trigger!');
         console.log('Data:', event.detail);
@@ -50,6 +54,7 @@
 
       window.addEventListener('gb-provide-sayt-suggestions', (event) => {
         console.log('View layer received event:', event.type);
+        this.products = event.detail.products
         const products = event.detail.products
         if (!products) { return }
 
@@ -58,14 +63,39 @@
           console.log(`${product.name}: ${product.price}`);
         })
         console.log('--------------------------');
+        this.render()
       })
     }
 
     connectedCallback() {
       console.log('In connectedCallback');
+      this.firstRender()
+      this.container = this.querySelector('.gb-sayt-container')
+    }
+
+    firstRender() {
       this.innerHTML = `
-        <div>SAYT content goes here</div>
+        <div class="gb-sayt-container">No content.</div>
       `
+    }
+
+    render() {
+      if (!this.products || this.products.length === 0) {
+        this.container.classList.add('closed')
+        this.container.classList.remove('open')
+        return this.container.innerHTML = `No content.`
+      }
+      this.container.innerHTML = this.products.map(product => {
+        return `
+          <div class='product'>
+            <p>${product.name}</p>
+            <p>${product.price}</p>
+            <p><img src="${product.image}" /></p>
+          </div>
+        `
+      }).join('')
+      this.container.classList.add('open')
+      this.container.classList.remove('closed')
     }
 
     requestSaytSuggestions(searchTerm) {
