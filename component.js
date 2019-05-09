@@ -62,8 +62,10 @@
     getSaytSuggestions() {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          resolve(window.mockData.slice(100, 110))
-        }, 1000)
+          const numItems = 10
+          const minIndex = Math.random() * (window.mockData.length - numItems)
+          resolve(window.mockData.slice(minIndex, minIndex + numItems))
+        }, 350)
       })
     }
   }
