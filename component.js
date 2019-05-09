@@ -41,6 +41,14 @@
       document.addEventListener('gb-trigger-sayt', (event) => {
         console.log('Successfully caught SAYT trigger!');
         console.log('Data:', event.detail);
+
+        this.getSaytSuggestions().then((products) => {
+          console.log('All products: ------------');
+          products.forEach((product) => {
+            console.log(`${product.name}: ${product.price}`);
+          })
+          console.log('--------------------------');
+        })
       })
     }
 
@@ -49,6 +57,14 @@
       this.innerHTML = `
         <div>SAYT content goes here</div>
       `
+    }
+
+    getSaytSuggestions() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(window.mockData.slice(100, 110))
+        }, 1000)
+      })
     }
   }
   customElements.define('gb-sayt', GBSayt)
