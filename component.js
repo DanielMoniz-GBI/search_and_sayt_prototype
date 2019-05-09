@@ -62,7 +62,6 @@
     getSaytSuggestions(searchTerm) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          const numItems = 10
           const items = window.mockData.filter(product => {
             return product.name.toLowerCase().startsWith(searchTerm.toLowerCase())
           }).slice(0, 10)
