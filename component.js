@@ -1,4 +1,6 @@
 (function() {
+  console.log('View layer loaded...');
+
   class GBBaseElement extends HTMLElement {
     fireEvent(name, data) {
       const event = new CustomEvent(name, {
@@ -40,17 +42,22 @@
     constructor() {
       super()
       console.log('in constructor for GBSayt');
-      document.addEventListener('gb-trigger-sayt', (event) => {
+      window.addEventListener('gb-trigger-sayt', (event) => {
         console.log('Successfully caught SAYT trigger!');
         console.log('Data:', event.detail);
+        this.requestSaytSuggestions(event.detail.searchTerm)
+      })
 
-        this.getSaytSuggestions(event.detail.searchTerm).then((products) => {
-          console.log('All products: ------------');
-          products.forEach((product) => {
-            console.log(`${product.name}: ${product.price}`);
-          })
-          console.log('--------------------------');
+      window.addEventListener('gb-provide-sayt-suggestions', (event) => {
+        console.log('View layer received event:', event.type);
+        const products = event.detail.products
+        if (!products) { return }
+
+        console.log('All products: ------------');
+        products.forEach((product) => {
+          console.log(`${product.name}: ${product.price}`);
         })
+        console.log('--------------------------');
       })
     }
 
@@ -61,14 +68,10 @@
       `
     }
 
-    getSaytSuggestions(searchTerm) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          const items = window.mockData.filter(product => {
-            return product.name.toLowerCase().startsWith(searchTerm.toLowerCase())
-          }).slice(0, 10)
-          resolve(items)
-        }, 350)
+    requestSaytSuggestions(searchTerm) {
+      this.fireEvent('gb-request-sayt-suggestions', {
+        searchTerm,
+        quantity: 10,
       })
     }
   }
