@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function waitForResults() {
     const results = document.querySelector('main .results')
     const spinner = document.createElement('img')
-    spinner.src = 'spinner.jpg'
+    spinner.src = 'client/spinner.jpg'
     spinner.classList.add('spinner')
     results.prepend(spinner)
   }
