@@ -7,6 +7,16 @@
 //     }
 //   })
 document.addEventListener('DOMContentLoaded', function() {
+  const searchSpinner = document.querySelector('.search-spinner')
+  window.addEventListener('gb-sayt-start-search', () => {
+    searchSpinner.style.visibility = 'visible'
+  })
+
+  window.addEventListener('gb-provide-sayt-suggestions', () => {
+    console.log('Client caught gb-provide-sayt-suggestions');
+    searchSpinner.style.visibility = 'hidden'
+  })
+
   const url = new URL(window.location)
   let pageNum = parseInt(url.searchParams.get('page')) || 1
   window.getProducts = getProducts

@@ -37,6 +37,12 @@ main .results {
   text-align: center;
 }
 
+.search-spinner {
+  width: 20px;
+  height: 20px;
+  visibility: hidden;
+}
+
 nav.pagination {
   grid-column: 1 / 5;
   display: flex;
