@@ -69,11 +69,12 @@
     connectedCallback() {
       this.firstRender()
       this.container = this.querySelector('.gb-sayt-container')
+      this.container.classList.add('closed')
     }
 
     firstRender() {
       this.innerHTML = `
-        <div class="gb-sayt-container">No content.</div>
+        <div class="gb-sayt-container"></div>
       `
     }
 
@@ -81,7 +82,7 @@
       this.container.classList.add('open')
       this.container.classList.remove('closed')
       if (!this.products || this.products.length === 0) {
-        return this.container.innerHTML = `No content.`
+        return this.container.innerHTML = `No items.`
       }
       this.container.innerHTML = this.products.map(product => {
         return `

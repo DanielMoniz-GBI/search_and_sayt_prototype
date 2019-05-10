@@ -16,6 +16,7 @@
 }
 
 .gb-sayt-container.closed {
+  display: none;
   height: 0px;
 }
 
