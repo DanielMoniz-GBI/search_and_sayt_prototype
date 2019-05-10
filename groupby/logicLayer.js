@@ -14,19 +14,13 @@ const cache = (function() {
   console.log('Logic layer loaded...');
   document.addEventListener('gb-request-sayt-suggestions', (event) => {
     console.log('Logic layer received event:', event.type);
-    console.log('Event details:', event.detail);
-    console.log('Event:', event);
 
     const searchTerm = event.detail.searchTerm
     if (!searchTerm) { return }
 
     const cachedResponse = cache.get(searchTerm)
     if (cachedResponse) {
-      const responseEvent = new CustomEvent('gb-provide-sayt-suggestions', {
-        bubbles: true,
-        detail: cachedResponse,
-      })
-      return dispatchEvent(responseEvent)
+      return dispatchSaytSuggestions(cachedResponse)
     }
 
     const quantity = event.detail.quantity || 5
@@ -39,16 +33,19 @@ const cache = (function() {
       quantity,
       products,
     }
-    const responseEvent = new CustomEvent('gb-provide-sayt-suggestions', {
-      bubbles: true,
-      detail: searchInfo,
-    })
-    console.log('responseEvent:', responseEvent);
     setTimeout(() => {
-      dispatchEvent(responseEvent)
+      dispatchSaytSuggestions(searchInfo)
       cache.set(searchTerm, searchInfo)
     }, 400)
   })
+
+  function dispatchSaytSuggestions(data) {
+    const responseEvent = new CustomEvent('gb-provide-sayt-suggestions', {
+      bubbles: true,
+      detail: data,
+    })
+    dispatchEvent(responseEvent)
+  }
 
 
 })()

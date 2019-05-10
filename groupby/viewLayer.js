@@ -41,7 +41,6 @@
 
   class GBSayt extends GBBaseElement {
     constructor() {
-      console.log('in constructor for GBSayt');
       super()
       this.container = undefined
       this.products = []
@@ -68,7 +67,6 @@
     }
 
     connectedCallback() {
-      console.log('In connectedCallback');
       this.firstRender()
       this.container = this.querySelector('.gb-sayt-container')
     }
