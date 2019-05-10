@@ -66,6 +66,8 @@ import { html, render } from 'https://unpkg.com/lit-html@1.0.0/lit-html.js'
         console.log('--------------------------');
         this.render()
       })
+
+      this.renderProducts = this.renderProducts.bind(this)
     }
 
     connectedCallback() {
@@ -84,17 +86,24 @@ import { html, render } from 'https://unpkg.com/lit-html@1.0.0/lit-html.js'
       this.container.classList.add('open')
       this.container.classList.remove('closed')
       if (!this.products || this.products.length === 0) {
-        return this.container.innerHTML = `No items.`
+        return render(`No items.`, this.container)
       }
-      this.container.innerHTML = this.products.map(product => {
-        return `
-          <div class='product'>
-            <p>${product.name}</p>
-            <p>${product.price}</p>
-            <p><img src="${product.image}" /></p>
-          </div>
-        `
-      }).join('')
+
+      render(this.renderProducts(), this.container)
+    }
+
+    renderProducts() {
+      return html`
+        ${this.products.map(product => {
+          return html`
+            <div class='product'>
+              <p>${product.name}</p>
+              <p>${product.price}</p>
+              <p><img src="${product.image}" /></p>
+            </div>
+          `
+        })}
+      `
     }
 
     requestSaytSuggestions(searchTerm) {
