@@ -67,6 +67,14 @@ import { html, render } from '/node_modules/lit-html/lit-html.js'
         this.render()
       })
 
+      window.addEventListener('gb-sayt-open', () => this.open())
+      window.addEventListener('gb-sayt-close', () => this.close())
+      window.addEventListener('click', (event) => {
+        if (!this.contains(event.target)) {
+          this.close()
+        }
+      })
+
       this.renderProducts = this.renderProducts.bind(this)
     }
 
