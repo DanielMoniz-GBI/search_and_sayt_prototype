@@ -13,4 +13,3 @@ Prototype GroupBy code is under the `groupby/` directory. Sample client code, wh
   * functional
   * snapshot
 * Try a rendering library ([lit-html](https://lit-html.polymer-project.org/))
-* Add simple key-value caching in the logic layer
