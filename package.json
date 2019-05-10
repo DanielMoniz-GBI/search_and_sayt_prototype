@@ -1,0 +1,24 @@
+{
+  "name": "sayt",
+  "version": "1.0.0",
+  "description": "Prototypes for both Search and Sayt.",
+  "main": "index.html",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielMoniz-GBI/search_and_sayt_prototype.git"
+  },
+  "author": "Daniel Moniz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanielMoniz-GBI/search_and_sayt_prototype/issues"
+  },
+  "homepage": "https://github.com/DanielMoniz-GBI/search_and_sayt_prototype#readme"
+}
