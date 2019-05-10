@@ -73,7 +73,7 @@ import { html, render } from '/node_modules/lit-html/lit-html.js'
     connectedCallback() {
       this.firstRender()
       this.container = this.querySelector('.gb-sayt-container')
-      this.container.classList.add('closed')
+      this.close()
     }
 
     firstRender() {
@@ -83,8 +83,7 @@ import { html, render } from '/node_modules/lit-html/lit-html.js'
     }
 
     render() {
-      this.container.classList.add('open')
-      this.container.classList.remove('closed')
+      this.open()
       if (!this.products || this.products.length === 0) {
         return render(`No items.`, this.container)
       }
@@ -111,6 +110,16 @@ import { html, render } from '/node_modules/lit-html/lit-html.js'
         searchTerm,
         quantity: 10,
       })
+    }
+
+    open() {
+      this.container.classList.add('open')
+      this.container.classList.remove('closed')
+    }
+
+    close() {
+      this.container.classList.add('closed')
+      this.container.classList.remove('open')
     }
   }
   customElements.define('gb-sayt', GBSayt)
