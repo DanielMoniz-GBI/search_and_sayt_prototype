@@ -17,4 +17,3 @@ Prototype GroupBy code is under the `groupby/` directory. Sample client code, wh
   * functional
   * snapshot
 * Add a build step for lit-html (and any other requirements)
-* Allow for closing the SAYT container
