@@ -17,6 +17,7 @@
   },
   "scripts": {
     "test": "jest",
+    "tdd": "npm test -- --watch",
     "start": "http-server",
     "watch": "npx webpack --config webpack.config.js --watch"
   },
