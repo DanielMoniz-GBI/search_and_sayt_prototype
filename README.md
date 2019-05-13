@@ -5,7 +5,11 @@ A rough proof of concept for Search and SAYT (Search-as-you-type) elements using
 
 ## To run
 
+`npm build` --> builds into the `dist/` directory
+
 `npm start` --> visit http://localhost:8080/
+
+`npm run watch` --> watch for changes and rebuild
 
 ## Organization
 
