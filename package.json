@@ -8,12 +8,15 @@
     "lit-html": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-jest": "^24.8.0",
     "jest": "^24.8.0",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2"
   },
   "scripts": {
-    "test": "npm test",
+    "test": "jest",
     "start": "http-server",
     "watch": "npx webpack --config webpack.config.js --watch"
   },
@@ -25,6 +28,11 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/DanielMoniz-GBI/search_and_sayt_prototype/issues"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "!node_modules"
+    ]
   },
   "homepage": "https://github.com/DanielMoniz-GBI/search_and_sayt_prototype#readme"
 }
