@@ -6,6 +6,7 @@ export default class GBSearch extends GBBaseElement {
   constructor() {
     super()
     this.searchBox = undefined
+    this.heading = 'example-start-value'
 
     this.addEventListener('keyup', () => {
       console.log('|' + this.searchBox.value + '|');
@@ -14,6 +15,10 @@ export default class GBSearch extends GBBaseElement {
         this.fireEvent('gb-trigger-sayt', { 'searchTerm': this.searchBox.value })
       }
     })
+  }
+
+  static get observedAttributes() {
+    return ['searchBox']
   }
 
   connectedCallback() {
@@ -25,5 +30,10 @@ export default class GBSearch extends GBBaseElement {
       <input class="gb-search-box" type='text' placeholder='${placeholder}'></input>
     `
     this.searchBox = this.querySelector('.gb-search-box')
+    this.placeholder = placeholder
+  }
+
+  attributeChangedCallback(attr, oldValue, newValue) {
+    this[attr] = newValue
   }
 }
