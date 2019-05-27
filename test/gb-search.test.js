@@ -57,7 +57,7 @@ describe('<gb-search>', () => {
 
   describe('observedAttributes', () => {
     it('should register only searchBox as an observed attribute', () => {
-      expect(GBSearch.observedAttributes).deep.equal(['searchBox'])
+      expect(GBSearch.observedAttributes).deep.equal(['placeholder'])
     })
   })
 

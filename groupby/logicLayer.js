@@ -12,9 +12,10 @@ const cache = (function() {
 
 (function() {
   console.log('Logic layer loaded...');
-  document.addEventListener('gb-request-sayt-suggestions', (event) => {
-    console.log('Logic layer received event:', event.type);
+  let mockData
+  getInitialMockData()
 
+  document.addEventListener('gb-request-sayt-suggestions', (event) => {
     const searchTerm = event.detail.searchTerm
     if (!searchTerm) { return }
 
@@ -28,7 +29,7 @@ const cache = (function() {
   })
 
   function search(searchTerm, quantity) {
-    const products = window.mockData.filter(product => {
+    const products = mockData.filter(product => {
       return product.name.toLowerCase().startsWith(searchTerm.toLowerCase())
     }).slice(0, quantity)
 
@@ -39,8 +40,10 @@ const cache = (function() {
     }
     dispatchSaytStartSearching()
     setTimeout(() => {
-      dispatchSaytSuggestions(searchInfo)
-      cache.set(searchTerm, searchInfo)
+      getInitialMockData().then(() => {
+        dispatchSaytSuggestions(searchInfo)
+        cache.set(searchTerm, searchInfo)
+      })
     }, 400)
   }
 
@@ -57,5 +60,11 @@ const cache = (function() {
       bubbles: true,
     })
     dispatchEvent(event)
+  }
+
+  function getInitialMockData() {
+    return fetch("https://s3.amazonaws.com/groupby-sample/mock-data.json")
+      .then(response => response.json())
+      .then(data => mockData = data)
   }
 })()

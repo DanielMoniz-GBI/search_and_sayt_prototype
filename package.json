@@ -18,7 +18,8 @@
     "@open-wc/testing-karma": "^2.0.0",
     "webpack-merge": "^4.1.5",
     "@open-wc/testing-karma-bs": "^1.0.0",
-    "@open-wc/testing": "^0.11.1"
+    "@open-wc/testing": "^0.11.1",
+    "@open-wc/demoing-storybook": "^0.2.0"
   },
   "scripts": {
     "test": "karma start --coverage",
@@ -30,7 +31,10 @@
     "test:prune-snapshots": "karma start --prune-snapshots",
     "test:legacy": "karma start --legacy --coverage",
     "test:legacy:watch": "karma start --legacy --auto-watch=true --single-run=false",
-    "test:bs": "karma start karma.bs.config.js --legacy --coverage"
+    "test:bs": "karma start karma.bs.config.js --legacy --coverage",
+    "site:build": "npm run storybook:build",
+    "storybook": "start-storybook -p 9001",
+    "storybook:build": "build-storybook -o _site -s storybook-static"
   },
   "repository": {
     "type": "git",

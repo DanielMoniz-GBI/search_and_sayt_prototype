@@ -9,22 +9,13 @@ export default class GBSayt extends GBBaseElement {
     this.products = []
 
     window.addEventListener('gb-trigger-sayt', (event) => {
-      console.log('Successfully caught SAYT trigger!');
-      console.log('Data:', event.detail);
       this.requestSaytSuggestions(event.detail.searchTerm)
     })
 
     window.addEventListener('gb-provide-sayt-suggestions', (event) => {
-      console.log('View layer received event:', event.type);
       this.products = event.detail.products
       const products = event.detail.products
       if (!products) { return }
-
-      console.log('All products: ------------');
-      products.forEach((product) => {
-        console.log(`${product.name}: ${product.price}`);
-      })
-      console.log('--------------------------');
       this.render()
     })
 
